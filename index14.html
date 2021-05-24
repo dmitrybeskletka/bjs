@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class StudentLog {
+            constructor(name){
+                this.name = name   
+                this.subjects = {}; 
+                this.allGrades = [];
+            }
+            getName(){
+                return this.name;
+            }
+            addGrade(grade, subject){
+                
+                if (isNaN(parseInt(grade)) || (grade < 1) || (grade > 5)){
+                    console.log(`Вы пытались поставить оценку '${grade}' по предмету '${subject}'. Допускаются только числа от 1 до 5.`); 
+                } else if (this.subjects[subject]) { 
+                    this.subjects[subject].push(grade);
+                } else {
+                    this.subjects[subject] = [grade]
+                }
+                return this.subjects[subject].length;
+            }
+            getAverageBySubject(subject){
+                let sum = 0;
+                let gradeKolvo = this.subjects[subject].length;
+                if (this.subjects[subject]){
+                    //console.log('dlina = ', this.subjects[subject].length);
+                    for (let i = 0; i < this.subjects[subject].length; i++){
+                        sum += this.subjects[subject][i];
+                       // console.log('sum = ',sum);
+                    }
+                    
+                    return sum / gradeKolvo;
+
+                } else return 0;
+            }
+            getTotalAverage(){
+                let sumAll = 0;
+                
+                for (let key in this.subjects){
+                    for (let i = 0; i <this.subjects[key].length; i++){
+                        sumAll += this.subjects[key][i];
+                        //console.log('sumAll =',sumAll);
+                        this.allGrades.push(this.subjects[key][i]);
+                    }
+                }
+                let longAll = this.allGrades.length;
+
+                return sumAll === 0 
+                    ? 0
+                    : sumAll / longAll;
+            }
+        }
+        
+       // const log = new StudentLog('Олег Никифоров');
+       // console.log(log);
+       // console.log(log.name);
+        //console.log(log.getName());
+        //console.log(log.addGrade(1, 'Algebra'));
+        //console.log(log.addGrade(1, 'biology'));
+        //console.log(log.addGrade(3, 'biology'));
+        //console.log(log.addGrade(5, 'biology'));
+        //console.log(log.getAverageBySubject('biology'));
+        //console.log(log.allGrades);
+        //console.log(log.getTotalAverage());
+        const log = new StudentLog('Олег Никифоров');
+        log.addGrade(2, 'algebra');
+        log.addGrade(4, 'algebra');
+        log.addGrade(5, 'geometry');
+        log.addGrade(4, 'geometry');
+        console.log(log.getTotalAverage());
+
+    </script>
+
+</body>
+</html>

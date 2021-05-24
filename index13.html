@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Weapon{
+            constructor(name, attack, durability, range){
+                this.name = name;
+                this.attack = attack;
+                this.durability = durability;
+                this.range = range;
+                this._originDurability = durability;
+            }
+            get originDurability() {
+                return this._originDurability;
+            }
+            get params() {
+                return `${this.name}_${this.durability}`;
+            }
+            set attackx2(value) {
+                this.attack = value * 2;
+            }
+
+            takeDamage(damage) {
+                if (this.durability >= damage) {
+                    this.durability = this.durability - damage; 
+                } else {
+                    this.durability = 0;
+                }              
+            }
+            getDamage(){
+                return this.durability >= 0.3 * this._originDurability
+                    ? this.attack
+                    : this.attack / 2; 
+            }
+            isBroken(){
+                return this.durability <= 0;
+            }
+        }
+        const first = new Weapon('Ruka', 10 , 200, 3);
+        first.takeDamage(200);
+        console.log(first.durability);
+        
+        console.log(first.getDamage());
+        console.log(first.isBroken());
+        const hand = new Weapon('Рука', 1, Infinity, 1);
+        //const Arrow = new Weapon('Лук', 10, 200, 3)
+        class Arrow extends Weapon{
+            constructor(){
+                super ('Лук', 10, 200, 3);
+            };
+        }
+        const arrow = new Arrow();
+        arrow.takeDamage(10);
+        console.log(arrow.durability);
+        console.log(arrow.attack);
+        console.log(arrow.range);
+
+
+        class LongArrow extends Arrow {
+            constructor(){
+                super();
+                this.name = 'Длинныи лук';
+                this.attack = 15;
+                this.range = 4;
+            }
+            
+        }
+        const longArrow = new LongArrow();
+        longArrow.takeDamage(20);
+        console.log(longArrow.durability);
+        console.log(longArrow.attack);
+        console.log(longArrow.range);
+        console.log(longArrow.params);
+        longArrow.attackx2 = 15;
+        console.log(longArrow.attack);
+
+        
+
+    </script>
+
+</body>
+</html>

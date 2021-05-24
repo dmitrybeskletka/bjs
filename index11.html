@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calc(percent, startSum, sum, srok) {
+            if (isNaN(parseInt(percent))) {
+                console.log(`Параметр percent содержит неправильное значение ${percent}`);
+                return;
+            } else  if (isNaN(parseInt(startSum))) {
+                console.log(`Параметр startSum содержит неправильное значение ${startSum}`);
+                return;
+            } else  if (isNaN(parseInt(sum))) {
+                console.log(`Параметр sum содержит неправильное значение ${sum}`);
+                return;
+            } 
+            const teloCredit = sum - startSum;        
+            const now = new Date();
+            const dateSrok = new Date(srok);
+            const nowMonth = now.getMonth();
+            const endMonth = dateSrok.getMonth();
+            console.log(now);
+            console.log('nowMonth', nowMonth);
+            console.log('endMonth', endMonth);
+            let monthCredit = endMonth - nowMonth;
+            if (monthCredit <= 0) {
+                monthCredit += 12;
+            }
+            console.log('monthCredit', monthCredit);
+            const p = percent / (100 * 12);
+            console.log('p', p);
+            const plateg = teloCredit * (p + p /(Math.pow(1+p, monthCredit)-1));
+            console.log('plateg', plateg);
+            const itog = (plateg * monthCredit).toFixed(2);
+            console.log('itog', itog);
+            
+            return itog;
+        }
+        let i = calc('13', 0, 50000, '2022-05-05');
+        console.log(i);
+    </script>
+
+</body>
+</html>

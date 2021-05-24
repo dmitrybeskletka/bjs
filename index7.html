@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       
+        
+        
+        function getSolutions(a, b, c) {
+            let d;
+            let x1;
+            let x2;
+            let result = {
+                d: null,
+                roots: []
+            };
+            d = b**2 - (4 * a * c);
+            if (d < 0) {
+                return {d, roots: []}; 
+            } else if (d === 0){
+                x1 = -b / (2 * a);
+                return {d, roots: [x1]}
+                //result.roots = [x1];
+                //result.roots.push(x1)
+            } 
+            x1 = (-b - Math.pow(d, 0.5))/ (2 * a);
+            x2 = (-b + Math.pow(d, 0.5))/ (2 * a);
+            return {d, roots: [x1, x2]}
+            //console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x + ${c}`);
+        } 
+        function showSolutionsMessage(a, b, c) {
+
+        }    
+        const a = 2;
+        const b = 4;
+        const c = 2;
+        const result = getSolutions(a, b, c);
+        console.log(`Вычисляем корни квадратного уравнения ${a}x² + ${b}x + ${c}`);
+        console.log(result);
+        const massages = {0: 'Уравнение не имеет вещественных корней', 1: `Уравнение имеет один корень X₁ = ${result.roots[0]}`, 2: `Уравнение имеет два корня. X₁ = ${result.roots[0]}, X₂ = ${result.roots[1]}`};
+        console.log(massages[result.roots.length]);
+        //const text = 'aaa';
+        //const lobster = {aaa: 'a', bbb: 'b', ccc: 'c'}
+        //lobster['aaa']    
+        
+    </script>
+</body>
+</html>

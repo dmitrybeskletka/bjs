@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getAverageMark(marks) {
+            
+            let long = marks.length;
+            
+            let sum = 0;
+            for (let i = 0; i < long; i++) {
+                sum += marks[i];
+            }
+            let average = sum / marks.length;
+            return average;
+
+        }
+        //let result = getAverageMark([2, 5, 6]);
+        //console.log(result);
+        function getAverageScore(data){
+            let avg = Object.assign({}, data);
+            let quantity = 0;
+            let sum = 0;
+            for (let key in data) {
+                avg[key] = getAverageMark(data[key]);
+                sum += avg[key];
+                quantity += 1;
+                console.log(key, avg[key]);
+            }
+            if (quantity > 0) {
+                let average = sum / quantity;
+                
+            }
+            
+            return {...avg, average};
+
+        
+        }
+
+        let resultt = {
+            algebra: [2, 4, 5, 2, 3, 4],
+            geometry: [2, 4, 5],
+            russian: [3, 3, 4, 5],
+            physics: [5, 5],
+            music: [2, 2, 6],
+            english: [4, 4, 3],
+            poetry: [5, 3, 4],
+            chemistry: [2],
+            french: [4, 4]}
+        let primer = getAverageScore(resultt);
+        console.log(primer);
+    </script>
+</body>
+</html>

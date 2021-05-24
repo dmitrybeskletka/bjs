@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getAverageMark(marks) {
+            
+            if (!marks.length){
+                return;
+            }
+            
+            let long = marks.length;
+            console.log(long);
+            if (long === 0) {
+                return 0;
+            } else if (long > 5) {
+                console.log('>5');
+                marks = marks.slice(0, 5);
+                console.log(marks);
+                long = marks.length;
+
+            }
+            let sum = 0;
+            for (let i = 0; i < long; i++) {
+                sum = sum + marks[i];
+            }
+            console.log(sum);
+            return sum / long;
+            
+        }
+        let result = getAverageMark([5, 5, 5, 4, 4, 4]);
+        console.log(result);
+    </script>
+</body>
+</html>
