@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Weapon {
+	        constructor(name = 'weapon', attack = 3, durability = 3, range = 1) {
+		        this.name = name;
+		        this.attack = attack;
+		        this.durability = durability;
+		        this.initDurability = durability;
+		        this.range = range;
+	        };
+
+	        takeDamage(damage) {
+		        this.durability-=damage;
+
+		        if(this.durability <= 0){
+			        this.durability = 0;
+		        }
+	        };
+
+	        getDamage() {
+		        if(this.durability <= (this.initDurability/this.durability) * 30) {
+			    return this.attack / 2;
+		        } else if(this.durability <= 0) {
+			        return 0;
+		        } else {
+			        return this.attack;
+		        }
+	        };
+
+	        isBroken() {
+		        return !(this.durability > 0);
+	        };
+        }
+
+
+        class Bow extends Weapon {
+	        constructor() {
+		        super('Лук', 10, 200, 3);
+	        }
+        }
+        class Knife extends Weapon {
+	        constructor() {
+		    super('Нож', 5, 300, 1);
+	        }
+        }
+
+        class Staff extends Weapon {
+            constructor() {
+		        super('Посох', 8, 300, 2);
+	        }
+        }
+
+// Классы улучшенных оружий
+
+        class LongBow extends Bow {
+	        constructor() {
+		        super();
+
+		        this.name = 'Длинный лук';
+                this.attack = 15;
+                this.range = 4;
+            }
+        }
+        class Sword extends Weapon {
+	        constructor() {
+		        super('Меч', 25, 500, 1);
+	        }
+        }
+
+        class Axe extends Sword {
+            constructor() {
+                super();
+
+                this.name = 'Секира';
+                this.attack = 27;
+                this.durability = 800
+                this.initDurability = 800
+            }
+        }
+
+        class StormStaff extends Staff {
+            constructor() {
+                super();
+
+                this.name = 'Посох Бури';
+                this.attack = 10;
+                this.range = 3;
+            }
+        }
+
+        const weapons = [new Knife(), new Staff(), new Axe(), new StormStaff(), new LongBow(), new Bow()];
+        function getNames(weapons){
+            const result = weapons.map((weapon) => {
+                return weapon.name;
+            });
+            return result;
+        }
+        
+        
+        function getCountReliableWeapons(orugies, durabilitys){
+            const result = orugies.filter((dura) => {
+                return dura.durability > durabilitys
+            });
+           
+            return result.length;
+        }
+        
+
+        function hasReliableWeapons(orugies, durabilitys){
+            const result = orugies.some((dura) => {
+                return dura.durability > durabilitys;
+            });    
+            return result;
+        }
+
+        function getReliableWeaponsNames(orugies, durabilitys){
+            return orugies
+                .filter(dura => dura.durability > durabilitys)
+                .map(elem => elem.name);  
+        
+        }
+
+       
+
+        function getTotalDamage(orugies){
+            return orugies.reduce((acc, orugie) => {
+                acc += orugie.attack;
+                return acc;
+            }, 0);
+        }
+
+        function getValuestCountToSumValues(numbers, sum){
+            let summ = 1;
+            const a = numbers.reduce((acc, number) =>{
+                acc += number;             
+                if (acc < sum){
+                    summ += 1;
+                    
+                    
+                } 
+                return acc;                    
+
+            },0);
+            return summ;
+        }
+        
+        console.log(getNames(weapons));
+        console.log(getCountReliableWeapons(weapons, 10));
+        console.log(hasReliableWeapons(weapons, 10));
+        console.log(getReliableWeaponsNames(weapons,300));
+        console.log(getTotalDamage(weapons));
+        console.log(getValuestCountToSumValues([1,2,3,5,2,7,3,5,2], 20));
+        
+    </script>
+
+</body>
+</html>
